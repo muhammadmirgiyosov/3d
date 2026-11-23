@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fa">
+  <title>PRINT LAB — 3D-печать</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="#home"><span class="logo-mark">P</span> PRINT LAB</a>
+    <nav>
+      <a href="#shop" data-i18n="navShop">Магазин</a>
+      <a href="#about" data-i18n="navAbout">Обо мне</a>
+      <a href="#contacts" data-i18n="navContacts">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-btn" id="langToggle" type="button">UZ</button>
+      <a class="cart-link" href="#shop"><span data-i18n="catalog">Каталог</span> <span id="cartCount">0</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Открыть меню">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="heroEyebrow">ИДЕИ, КОТОРЫЕ МОЖНО ПОТРОГАТЬ</p>
+        <h1 data-i18n="heroTitle">Печатаем<br><span>твои идеи.</span></h1>
+        <p class="hero-text" data-i18n="heroText">Уникальные изделия, полезные мелочи и необычные подарки, созданные на 3D-принтере.</p>
+        <div class="hero-buttons">
+          <a class="btn btn-dark" href="#shop" data-i18n="seeProducts">Смотреть товары <span>↗</span></a>
+          <a class="text-link" href="#about" data-i18n="aboutProject">О проекте</a>
+        </div>
+        <div class="hero-note"><span class="dot"></span><span data-i18n="heroNote">Изготовление на заказ · Ташкент</span></div>
+      </div>
+      <div class="hero-art">
+        <div class="art-glow"></div>
+        <img src="images/hero-3d.svg" alt="Деталь, напечатанная на 3D-принтере">
+        <div class="floating-card"><span class="mini-icon">✳</span><div><b data-i18n="madeWithCare">Сделано с заботой</b><small data-i18n="madeWithCareSub">Деталь за деталью</small></div></div>
+        <span class="art-caption">3D / PRINT / CREATE</span>
+      </div>
+    </section>
+
+    <section class="ticker"><span>DESIGN</span><i>✳</i><span>PRINT</span><i>✳</i><span>CREATE</span><i>✳</i><span>REPEAT</span><i>✳</i><span>DESIGN</span></section>
+
+    <section class="section shop-section" id="shop">
+      <div class="section-heading">
+        <div><p class="eyebrow" data-i18n="shopEyebrow">ВЫБИРАЙ СВОЁ</p><h2 data-i18n="shopTitle">Наши изделия<span>.</span></h2></div>
+        <p data-i18n="shopSub">Найди готовую вещь или закажи свой вариант.</p>
+      </div>
+      <div class="shop-toolbar">
+        <div class="filters" id="filters">
+          <button class="filter active" data-filter="all" data-i18n="all">Все</button>
+          <button class="filter" data-filter="toys" data-i18n="toys">Игрушки</button>
+          <button class="filter" data-filter="home" data-i18n="homeGoods">Для дома</button>
+          <button class="filter" data-filter="custom" data-i18n="custom">На заказ</button>
+        </div>
+        <button class="admin-toggle" id="adminToggle" type="button">＋ <span data-i18n="manageProducts">Управление товарами</span></button>
+      </div>
+
+      <dialog id="adminLoginDialog" class="login-dialog">
+        <form id="adminLoginForm">
+          <button class="dialog-close" type="button" id="loginClose" aria-label="Закрыть">×</button>
+          <p class="eyebrow">PRINT LAB / ADMIN</p>
+          <h3>Вход в панель управления</h3>
+          <label>Логин<input name="adminLogin" autocomplete="username" required value="admin"></label>
+          <label>Пароль<input name="adminPassword" type="password" autocomplete="current-password" required placeholder="Введите пароль"></label>
+          <p class="login-error hidden" id="loginError">Неверный логин или пароль.</p>
+          <button class="btn btn-dark" type="submit">Войти</button>
+        </form>
+      </dialog>
+      <div class="admin-panel hidden" id="adminPanel">
+        <div class="admin-head"><div><b data-i18n="addProduct">Добавить товар</b><small data-i18n="adminHint">Товары сохраняются в этом браузере на этом устройстве.</small></div><div class="admin-head-actions"><button id="adminLogout" class="text-link" type="button">Выйти</button><button id="closeAdmin" class="close-btn" aria-label="Закрыть">×</button></div></div>
+        <form id="productForm" class="product-form">
+          <input name="titleRu" placeholder="Название (русский)" required>
+          <input name="titleUz" placeholder="Nomi (o‘zbekcha)" required>
+          <input name="price" type="number" min="0" placeholder="Цена в сумах" required>
+          <select name="category"><option value="toys">Игрушки</option><option value="home">Для дома</option><option value="custom">На заказ</option></select>
+          <input name="image" type="url" placeholder="Ссылка на фото (необязательно)">
+          <label class="upload-label"><span data-i18n="uploadPhoto">Или загрузить фото</span><input name="photoFile" type="file" accept="image/*"></label>
+          <textarea name="descRu" placeholder="Описание на русском"></textarea>
+          <textarea name="descUz" placeholder="Tavsif (o‘zbekcha)"></textarea>
+          <button class="btn btn-dark" type="submit" data-i18n="saveProduct">Сохранить товар</button>
+        </form>
+        <p class="admin-warning" data-i18n="adminWarning">Важно: это локальное управление для начала. Чтобы товары были видны всем посетителям, позже подключим базу данных и админ-панель.</p>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+      <div class="empty-state hidden" id="emptyState" data-i18n="empty">Пока здесь нет товаров. Добавь первый товар через управление.</div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="section about-grid">
+        <div class="about-photo"><img id="aboutImage" src="images/workshop.svg" alt="Рабочее место и создание изделий"><span class="photo-label">PRINT LAB / WORKSHOP</span></div>
+        <div class="about-copy"><p class="eyebrow" data-i18n="aboutEyebrow">НЕМНОГО ОБО МНЕ</p><h2 data-i18n="aboutTitle">От идеи<br>до готовой вещи<span>.</span></h2><p data-i18n="aboutText">Привет! Это PRINT LAB — небольшая мастерская 3D-печати. Здесь появляются интересные модели, полезные аксессуары и подарки. Можно выбрать готовое изделие или обсудить индивидуальный заказ.</p><div class="about-points"><div><b>01</b><span data-i18n="pointOne">Продуманный дизайн</span></div><div><b>02</b><span data-i18n="pointTwo">Аккуратная печать</span></div><div><b>03</b><span data-i18n="pointThree">Идеи на заказ</span></div></div><button class="text-link edit-about" id="editAbout" type="button" data-i18n="editAbout">Изменить текст и фото ↗</button></div>
+      </div>
+    </section>
+
+    <section class="section custom-section">
+      <div class="custom-card"><div><p class="eyebrow">YOUR IDEA / OUR PRINT</p><h2 data-i18n="customTitle">Не нашёл нужное?<br>Создадим вместе.</h2><p data-i18n="customText">Расскажи, что хочешь напечатать. Обсудим форму, цвет и детали в Telegram.</p></div><a class="btn btn-light" href="#contacts" data-i18n="customButton">Обсудить идею <span>↗</span></a><div class="custom-orbit">✳</div></div>
+    </section>
+
+    <section class="section contacts-section" id="contacts">
+      <div class="section-heading"><div><p class="eyebrow" data-i18n="contactEyebrow">ДАВАЙ НА СВЯЗИ</p><h2 data-i18n="contactTitle">Есть вопрос?<span>.</span></h2></div><p data-i18n="contactSub">Оставь заявку — Telegram обязателен, чтобы мы могли ответить.</p></div>
+      <form id="orderForm" class="order-form">
+        <div class="form-intro"><span class="form-icon">↗</span><b data-i18n="orderHeading">Заявка на заказ</b><small data-i18n="orderSub">Заполни форму, и она откроет Telegram с готовым сообщением.</small></div>
+        <label><span data-i18n="yourName">Твоё имя</span><input name="customerName" required maxlength="60" placeholder="Имя"></label>
+        <label><span>Telegram *</span><input name="telegram" required placeholder="@username" pattern="@[A-Za-z0-9_]{5,32}" title="Укажи Telegram в формате @username"></label>
+        <label><span data-i18n="chooseProduct">Что хочешь заказать?</span><select name="product" id="orderProduct"><option value="">—</option></select></label>
+        <label><span data-i18n="quantity">Количество</span><input name="quantity" type="number" min="1" max="100" value="1" required></label>
+        <label class="full"><span data-i18n="details">Комментарий / пожелания</span><textarea name="details" placeholder="Цвет, размер, идея..."></textarea></label>
+        <p class="form-error hidden" id="formError" data-i18n="formError">Проверь Telegram: нужен формат @username.</p>
+        <button class="btn btn-dark full" type="submit" data-i18n="sendOrder">Продолжить в Telegram <span>↗</span></button>
+        <small class="privacy-note full" data-i18n="privacy">Нажимая кнопку, ты откроешь Telegram и сам отправишь подготовленное сообщение.</small>
+      </form>
+    </section>
+  </main>
+
+  <footer><a class="logo" href="#home"><span class="logo-mark">P</span> PRINT LAB</a><span data-i18n="footerText">Создаём вещи, которые радуют.</span><a href="#home" class="back-top">↑</a></footer>
+
+  <dialog id="productDialog" class="product-dialog"><button class="dialog-close" id="dialogClose">×</button><img id="dialogImage" alt=""><div class="dialog-content"><p class="eyebrow">PRINT LAB / PRODUCT</p><h3 id="dialogTitle"></h3><p id="dialogDesc"></p><b id="dialogPrice"></b><button class="btn btn-dark" id="dialogOrder" data-i18n="orderThis">Заказать это изделие ↗</button></div></dialog>
+  <dialog id="aboutDialog" class="about-dialog"><form id="aboutForm" method="dialog"><button class="dialog-close" type="button" id="aboutClose">×</button><h3 data-i18n="editAboutTitle">Настроить раздел «Обо мне»</h3><label>Текст (RU)<textarea name="aboutRu"></textarea></label><label>Matn (UZ)<textarea name="aboutUz"></textarea></label><label data-i18n="aboutPhotoUrl">Ссылка на фото<input name="aboutPhoto" type="url"></label><label class="upload-label"><span data-i18n="uploadPhoto">Или загрузить фото</span><input name="aboutFile" type="file" accept="image/*"></label><button class="btn btn-dark" type="submit" data-i18n="saveChanges">Сохранить изменения</button></form></dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
